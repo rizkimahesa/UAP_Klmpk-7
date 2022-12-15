@@ -69,6 +69,6 @@ int main () {
 	
 	close :
 		closing ();
-	
+	hi
 	return 0;
 }
