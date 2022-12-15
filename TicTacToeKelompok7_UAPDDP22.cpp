@@ -1,12 +1,20 @@
-#include <ncurses/ncurses.h>
-#include <stdio.h>
-#include <windows.h>
+#include <ncurses/ncurses.h> //untuk menampilkan mvprintw dan menampilkan animasi
+#include <stdio.h> // untuk menampilkan fungsi printf, scanw
+#include <windows.h> // untuk menghasilkan fungsi sleep
 
+// kelompok 7
+// Devina Citra Felisha 2217051122 (bagian awal)
+// Farhan Dzaky Aldias 2217051073(bagian isi dan akhir)
+// Rizki Mahesa 2217051101 (bagian isi)
+
+// untuk pembuatan pada kotak tic tac toe
 char board [3][3] = {{'1','2','3'},{'4','5','6'},{'7','8','9'}};
-					 
+
+//variabel universal
 int player, row, column, input, win = 0;
 char reply = '1';
 
+//header yang digunakan
 void header () {
 	printf ("\n\t\t\t    _____ ___ ____      _____    _   _____       _____ ___  _____ \n");
 	printf ("\t\t\t   |_   _|_ _/  __\\    |_   _|  / \\ /   __\\     |_   _/ _ \\| ____|\n");
@@ -14,7 +22,7 @@ void header () {
 	printf ("\t\t\t     | |  | |  \\___      | |  / ___ \\  \\___       | || |_| | |___ \n");
 	printf ("\t\t\t     |_| |___\\____/      |_| /_/   \\_\\____/       |_| \\___/|_____|\n");
 }
-
+//untuk tampilan awal sebelum memasuki loading screen
 void start_screen () {
 	initscr ();
 	curs_set (0);
@@ -31,7 +39,7 @@ void start_screen () {
 	clear ();
 	endwin ();
 }
-
+//loading screen setelah tampilan awal
 void loading () {
 	initscr ();
 	curs_set (0);
@@ -45,7 +53,7 @@ void loading () {
 	clear ();
 	endwin ();
 }
-
+//untuk penutupan jika sang pemain sudah tidak ingin bermain lagi
 void closing () {
 	initscr ();
 	clear ();
@@ -57,21 +65,22 @@ void closing () {
 	getch ();
 	endwin ();
 }
-
+//program utama
 int main () {
-	
+	//menampilkan start screen
 	start :
 		start_screen ();
-	
+	//lalu meloading game nya
 	loading :
 		loading ();
-	
+	//masuk ke dalam gameplay
 	gameplay :
 		while (reply == '1') {
 			win = 0;
 			char board [3][3] = {{'1','2','3'},{'4','5','6'},{'7','8','9'}};
 			for (int i = 0; i < 9 && win == 0; i++) {
-			
+				
+			// gambaran tabel tic tac toe yang di isi dengan indeks array
 				system ("cls");
 				header ();
 				printf ("\n\n\n");
@@ -90,22 +99,25 @@ int main () {
 				printf ("\n\t\t\t\t\t\t      Player %d ", player);
 			
 				do {
-					
+					//inputan dari sang pemain ketika memainkan game tic tac toe
 					printf ("\n\t\t\t\t\t\t  It's your turn : ");
 					scanf ("%d", &input);
 					
+					//untuk pemain bisa menginput untuk kolom 1-3, untuk baris 1
 					if (input >= 1 && input <= 3) {
 						row = 0;
 						column = input - 1;
+					//untuk pemain bisa menginput untuk kolom 4-6, untuk baris 2
 					} else if (input >= 4 && input <= 6) {
 						row = 1;
 						column = input - 4;
+					//untuk pemain bisa menginput untuk kolom 7-9, untuk baris 3
 					} else {
 						row = 2;
 						column = input - 7;
 					}
 				} while (input < 1 || input > 9 || board [row][column] == 'X' || board [row][column] == 'O');
-		}
+		
 			//player 1 dikategorikan dengan simbol "x"
 				if (player == 1) {
 					board [row][column] = 'X';
