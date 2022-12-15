@@ -67,6 +67,48 @@ int main () {
 	loading :
 		loading ();
 	
+	gameplay :
+		while (reply == '1') {
+			win = 0;
+			char board [3][3] = {{'1','2','3'},{'4','5','6'},{'7','8','9'}};
+			for (int i = 0; i < 9 && win == 0; i++) {
+			
+				system ("cls");
+				header ();
+				printf ("\n\n\n");
+				printf ("\t\t\t\t\t\t _________________ \n");
+				printf ("\t\t\t\t\t\t|     |     |     |\n");
+				printf ("\t\t\t\t\t\t|  %c  |  %c  |  %c  |\n", board [0][0], board [0][1], board [0][2]);
+				printf ("\t\t\t\t\t\t|_____|_____|_____|\n");
+				printf ("\t\t\t\t\t\t|     |     |     |\n");
+				printf ("\t\t\t\t\t\t|  %c  |  %c  |  %c  |\n", board [1][0], board [1][1], board [1][2]);
+				printf ("\t\t\t\t\t\t|_____|_____|_____|\n");
+				printf ("\t\t\t\t\t\t|     |     |     |\n");
+				printf ("\t\t\t\t\t\t|  %c  |  %c  |  %c  |\n", board [2][0], board [2][1], board [2][2]);
+				printf ("\t\t\t\t\t\t|_____|_____|_____|\n");
+			
+				player = i%2 + 1;
+				printf ("\n\t\t\t\t\t\t      Player %d ", player);
+			
+				do {
+					
+					printf ("\n\t\t\t\t\t\t  It's your turn : ");
+					scanf ("%d", &input);
+					
+					if (input >= 1 && input <= 3) {
+						row = 0;
+						column = input - 1;
+					} else if (input >= 4 && input <= 6) {
+						row = 1;
+						column = input - 4;
+					} else {
+						row = 2;
+						column = input - 7;
+					}
+				} while (input < 1 || input > 9 || board [row][column] == 'X' || board [row][column] == 'O');
+		}
+	}
+	
 	close :
 		closing ();
 	
