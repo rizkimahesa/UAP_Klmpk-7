@@ -1,5 +1,4 @@
 #include <ncurses/ncurses.h>
-#include <stdlib.h>
 #include <stdio.h>
 #include <windows.h>
 
@@ -107,6 +106,65 @@ int main () {
 					}
 				} while (input < 1 || input > 9 || board [row][column] == 'X' || board [row][column] == 'O');
 		}
+			//player 1 dikategorikan dengan simbol "x"
+				if (player == 1) {
+					board [row][column] = 'X';
+				//sedangkan jika bukan player 1 atau disini kami membuat player 2 maka simbol nya "o"
+				} else {
+					board [row][column] = 'O';
+				}
+				//jika terdapat 3 kolom yang sama maka player menang
+				for (row = 0; row < 3; row++) {
+					if (board [row][0] == board [row][1] && board [row][1] == board [row][2]){
+						win = player;
+					}
+				}
+				//jika terdapat 3 baris yang sama maka player menang
+				for (column = 0; column < 3; column++){
+					if (board [0][column] == board [1][column] && board [1][column] == board [2][column]) {
+						win = player;
+					}
+				}
+				//jika terdapat 3 simbol yang sama dalam diagonal maka player menang
+				if (board [0][0] == board[1][1] && board [1][1] == board [2][2]) {
+					win = player;
+				} else if (board [0][2] == board [1][1] && board [1][1] == board [2][0]) {
+					win = player;
+				}
+			}
+			//menampilkan hasil tabel yang sudah dimainkan
+			system ("cls");
+			header ();
+			printf ("\n\n\n");
+			printf ("\t\t\t\t\t\t _________________ \n");
+			printf ("\t\t\t\t\t\t|     |     |     |\n");
+			printf ("\t\t\t\t\t\t|  %c  |  %c  |  %c  |\n", board [0][0], board [0][1], board [0][2]);
+			printf ("\t\t\t\t\t\t|_____|_____|_____|\n");
+			printf ("\t\t\t\t\t\t|     |     |     |\n");
+			printf ("\t\t\t\t\t\t|  %c  |  %c  |  %c  |\n", board [1][0], board [1][1], board [1][2]);
+			printf ("\t\t\t\t\t\t|_____|_____|_____|\n");
+			printf ("\t\t\t\t\t\t|     |     |     |\n");
+			printf ("\t\t\t\t\t\t|  %c  |  %c  |  %c  |\n", board [2][0], board [2][1], board [2][2]);
+			printf ("\t\t\t\t\t\t|_____|_____|_____|\n");
+			
+			//program untuk menentukan player akan menang atau seri
+			if (win != 0) {
+				printf ("\n\t\t\t\t    Congratulations !!! Player %d Wins this game", win);
+			} else {
+				printf ("\n\t\t\t\t\t\tGame ends in a Draw");
+			}
+		
+			//jika pemain ingin main lagi cukup menekan 1, maka akan kembali ke awal
+			printf ("\n\n\t\t\t\t    Press 1 if you want to play this again : ");
+			scanf (" %c", &reply);
+		}
+	//jika pemain menekan angka selain 1 maka permainan akan selesai dengan closing
+	close :
+		closing ();
+	
+	return 0;
+	// game selesai Terima Kasih!!!
+}
 	}
 	
 	close :
