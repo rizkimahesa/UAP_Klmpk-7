@@ -165,10 +165,3 @@ int main () {
 	return 0;
 	// game selesai Terima Kasih!!!
 }
-	}
-	
-	close :
-		closing ();
-	
-	return 0;
-}
